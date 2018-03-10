@@ -6,6 +6,9 @@ import java.util.Map;
 
 import com.google.firebase.database.DataSnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by roger on 10/03/2018.
  */
@@ -36,6 +39,16 @@ public class Product implements Serializable {
         for (DataSnapshot item : dataSnapshot.child("size").getChildren()){
             size.put(item.getKey(), (String) item.getValue());
         }
+    }
+
+    public Map toJson(){
+        Map mapPoints = new HashMap();
+        mapPoints.put("description", description);
+        mapPoints.put("name", name);
+        mapPoints.put("price", price+"");
+        mapPoints.put("size", size);
+
+        return mapPoints;
     }
 
     public String getId() {
