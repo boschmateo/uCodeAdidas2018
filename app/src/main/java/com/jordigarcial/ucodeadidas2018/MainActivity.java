@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,18 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onProductDetail(View view) {
+    public void ProductDetail(View view) {
         Intent productDetailActivity = new Intent(this, ProductDetailActivity.class);
         startActivity(productDetailActivity);
 
     }
 
-    public void onProductList(View view) {
+    public void ProductList(View view) {
         Intent productListActivity = new Intent(this, ProductListActivity.class);
         startActivity(productListActivity);
     }
 
-    public void onWishlist(View view) {
+    public void Wishlist(View view) {
         Intent wishlistActivity = new Intent(this, WishlistActivity.class);
         startActivity(wishlistActivity);
     }
