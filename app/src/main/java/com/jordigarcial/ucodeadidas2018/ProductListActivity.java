@@ -6,7 +6,7 @@ import android.os.Bundle;
 public class ProductListActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState, ArrayList<>) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
     }
