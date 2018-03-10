@@ -14,9 +14,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        
     }
-    
+
     public void onProductDetail(View view) {
         Intent productDetailActivity = new Intent(this, ProductDetailActivity.class);
         startActivity(productDetailActivity);
