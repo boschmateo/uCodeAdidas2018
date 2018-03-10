@@ -12,6 +12,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class ProductDetailActivity extends AppCompatActivity {
 
     private TextView tv_product_id;
@@ -25,16 +31,39 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
 
         findLayoutViews(this);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("products");
 
         Product product;
         if (activityWasLaunchedByNFC()){
             String productId = getTagString();
-            product = getProductWithId(productId); // TODO: RU
+            System.out.println(productId);
+            getProductWithId(productId, ref); // TODO: RU
         }
-        else product = getProductFromIntent();
+        else {
+            product = getProductFromIntent();
+            populateViewsWithProduct(product);
+        }
 
-        populateViewsWithProduct(product);
 
+
+    }
+
+    private void getProductWithId(String productId, DatabaseReference ref){
+
+        ref.child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Product p = new Product(dataSnapshot);
+                System.out.println(p.getName());
+                populateViewsWithProduct(p);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**
