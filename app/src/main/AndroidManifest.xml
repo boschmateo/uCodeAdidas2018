@@ -3,6 +3,7 @@
     package="com.jordigarcial.ucodeadidas2018">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ucodeadidas"
@@ -17,9 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductDetailActivity" />
+        <activity android:name=".ProductDetailActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <activity android:name=".WishlistActivity" />
-        <activity android:name=".ProductListActivity"></activity>
+        <activity android:name=".ProductListActivity"/>
     </application>
+
+
 
 </manifest>
