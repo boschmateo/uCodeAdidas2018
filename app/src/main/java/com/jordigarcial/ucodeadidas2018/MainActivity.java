@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onWishlist(View view) {
-        Intent wishlistActivity = new Intent(this, wishlistActivity.class);
+        Intent wishlistActivity = new Intent(this, WishlistActivity.class);
         startActivity(wishlistActivity);
     }
 
