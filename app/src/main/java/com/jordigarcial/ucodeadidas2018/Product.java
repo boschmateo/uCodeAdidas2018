@@ -10,7 +10,7 @@ import com.google.firebase.database.DataSnapshot;
  * Created by roger on 10/03/2018.
  */
 
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     private String id;
     private String description;
@@ -18,12 +18,25 @@ public class Product implements Serializable{
     private float price;
     private Map<Integer, Integer> size;
 
+    public Product() {
+
+    }
+
+    public Product(String id, String description, String name, float price) {
+        this.id = id;
+        this.description = description;
+        this.name = name;
+        this.price = price;
+
+    }
+
     public Product(DataSnapshot dataSnapshot){
+        System.out.print(dataSnapshot.getKey());
         size = new HashMap<>();
         id = dataSnapshot.getKey();
         description = (String)dataSnapshot.child("description").getValue();
         name = (String)dataSnapshot.child("name").getValue();
-        price = (float)dataSnapshot.child("price").getValue();
+        price = Float.parseFloat(""+dataSnapshot.child("price").getValue());
         for (DataSnapshot item : dataSnapshot.child("size").getChildren()){
             size.put(Integer.parseInt(item.getKey()), (Integer) item.getValue());
         }
@@ -43,6 +56,22 @@ public class Product implements Serializable{
 
     public float getPrice() {
         return price;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public Map<Integer, Integer> getSize() {
