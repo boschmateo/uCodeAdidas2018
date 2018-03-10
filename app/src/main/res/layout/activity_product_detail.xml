@@ -19,31 +19,31 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Product id"/>
+        tools:text="Product id"
+        android:id="@+id/tv_product_id"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Product name"/>
+        tools:text="Product name"
+        android:id="@+id/tv_product_name"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Product description"/>
+        tools:text="Product description"
+        android:id="@+id/tv_product_desc"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Product prize"/>
+        tools:text="Product price"
+        android:id="@+id/tv_product_price"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Product size"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Product quantity"/>
+        tools:text="Product size"
+        android:id="@+id/tv_product_size"/>
 
 </LinearLayout>
