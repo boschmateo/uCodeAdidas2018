@@ -18,9 +18,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ProductDetail(View view) {
-        Intent productDetailActivity = new Intent(this, ProductDetailActivity.class);
-        startActivity(productDetailActivity);
+        Product product = new Product.ProductBuilder()
+                .setId("0")
+                .setName("Yeezy Boost")
+                .setDesc("Kanye's greatest yeezys yet!!")
+                .setPrice(100.0f)
+                .build();
 
+        ProductDetailActivity.start(this, product);
     }
 
     public void ProductList(View view) {
