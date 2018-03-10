@@ -2,6 +2,8 @@ package Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,49 +15,54 @@ import com.jordigarcial.ucodeadidas2018.Product;
 import com.jordigarcial.ucodeadidas2018.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sergi on 10/03/2018.
  */
 
-public class ProductListAdapter extends ArrayAdapter<Product> {
+public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter.PersonViewHolder> {
 
-    ArrayList<Product> products;
+    List<Product> products;
 
-    private ProductListAdapter(Context context, int resourceId, ArrayList<Product> product) {
-        super(context, resourceId, product);
-        this.products = product;
+    public ProductListAdapter(List<Product> products){
+        this.products=products;
     }
 
-    public static ProductListAdapter create(Context context, int resourceId, ArrayList<Product> product){
-        return new ProductListAdapter(context, resourceId, product);
+    @Override
+    public int getItemCount() {
+        return products.size();
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View principleItemView = convertView;
+    @Override
+    public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product, viewGroup, false);
+        PersonViewHolder pvh = new PersonViewHolder(v);
+        return pvh;
+    }
 
-        if (principleItemView==null){
-            principleItemView = inflatePrincipaleItemView(parent);
+    @Override
+    public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
+        personViewHolder.name.setText(products.get(i).getName());
+        personViewHolder.price.setText(products.get(i).getPrice()+"€");
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    public static class PersonViewHolder extends RecyclerView.ViewHolder{
+        CardView cv;
+        TextView name;
+        TextView price;
+
+        PersonViewHolder(View itemView){
+            super(itemView);
+            cv = (CardView) itemView.findViewById(R.id.product_cv);
+            name = (TextView) itemView.findViewById(R.id.name);
+            price = (TextView) itemView.findViewById(R.id.price);
         }
-        Product product = products.get(position);
-
-        TextView name = (TextView) principleItemView.findViewById(R.id.name);
-        name.setText(product.getName());
-        TextView price = (TextView) principleItemView.findViewById(R.id.price);
-        price.setText(product.getPrice()+"");
-
-
-        return principleItemView;
     }
-
-    private View inflatePrincipaleItemView(ViewGroup parent){
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return inflater.inflate(R.layout.product, null);
-    }
-
-    private void fillProductItemView(Product product){
-
-    }
-
 
 }

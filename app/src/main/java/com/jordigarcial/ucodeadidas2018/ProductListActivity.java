@@ -2,6 +2,8 @@ package com.jordigarcial.ucodeadidas2018;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -18,13 +20,17 @@ import Adapters.ProductListAdapter;
 
 public class ProductListActivity extends AppCompatActivity {
 
-    ListView listView;
+    RecyclerView recyclerView;
     ArrayList<Product> productsList = new ArrayList<Product>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
+        RecyclerView rv = (RecyclerView)findViewById(R.id.recyclerView);
+        rv.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("products");
@@ -35,7 +41,6 @@ public class ProductListActivity extends AppCompatActivity {
                     Product product = new Product(item);
                     System.out.println("Product added: "+product.getName());
                     productsList.add(product);
-
                 }
             }
 
@@ -44,9 +49,9 @@ public class ProductListActivity extends AppCompatActivity {
 
             }
         });
-        listView=findViewById(R.id.listView);
-        ProductListAdapter adapter = ProductListAdapter.create(ProductListActivity.this, R.id.listView, productsList);
-        listView.setAdapter(adapter);
+        recyclerView=findViewById(R.id.recyclerView);
+        ProductListAdapter adapter = new ProductListAdapter(productsList);
+        recyclerView.setAdapter(adapter);
 
     }
 }
