@@ -26,7 +26,7 @@ public class ProductListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_list);
+        setContentView(R.layout.activity_main);
 
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
