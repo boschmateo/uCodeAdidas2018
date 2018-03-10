@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "182212873226",
+    "firebase_url": "https://adidas-nfc.firebaseio.com",
+    "project_id": "adidas-nfc",
+    "storage_bucket": "adidas-nfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182212873226:android:d95caa28f69f0a8c",
+        "android_client_info": {
+          "package_name": "com.jordigarcial.ucodeadidas2018"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182212873226-epdvbqmh9pvc9oft8u1a0t9ki2mngu7s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jordigarcial.ucodeadidas2018",
+            "certificate_hash": "6b9902d463a8c915b918b22762f7a80746365f30"
+          }
+        },
+        {
+          "client_id": "182212873226-n2lup5imae44sqsg8kmrijm5qgh8ev3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnibbwq-FT_ZvtIlJiNbkReNOjjF0cHyY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182212873226-n2lup5imae44sqsg8kmrijm5qgh8ev3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
