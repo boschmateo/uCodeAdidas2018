@@ -2,20 +2,20 @@
 <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/name"
-        android:layout_witdh="match_parent"
-        android:layout_weight="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Name">
     </TextView>
 
     <TextView
         android:id="@+id/price"
-        android:layout_witdh="match_parent"
-        android:layou_weight="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Price">
     </TextView>
 
