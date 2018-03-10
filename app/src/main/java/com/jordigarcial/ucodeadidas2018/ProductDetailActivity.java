@@ -13,12 +13,15 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Map.Entry;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -27,6 +30,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private TextView tv_product_desc;
     private TextView tv_product_price;
     private ImageView tv_product_image;
+    private TextView tv_product_size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +95,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_product_desc = act.findViewById(R.id.tv_product_desc);
         tv_product_price = act.findViewById(R.id.tv_product_price);
         tv_product_image = act.findViewById(R.id.tv_product_image);
+        tv_product_size = act.findViewById(R.id.tv_product_size);
     }
 
     public static void printToast(Context ctx, String msg) {
@@ -146,7 +151,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_product_id.setText(product.getId());
         tv_product_name.setText(product.getName());
         tv_product_desc.setText(product.getDescription());
-        tv_product_price.setText(product.getPrice()+"");
+        tv_product_price.setText(product.getPrice()+"€");
+        /*String sizes="";
+        for (Map.Entry<String,String> value : product.getSize().entrySet()){
+            sizes = sizes + " " +value.getKey()+ ": " +value.ge
+        }
+        tv_product_size.setText(product.getSize().);
+        */
     }
 
 }
