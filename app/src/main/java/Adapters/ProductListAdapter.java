@@ -1,5 +1,6 @@
 package Adapters;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,7 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.jordigarcial.ucodeadidas2018.Product;
+import com.jordigarcial.ucodeadidas2018.ProductDetailActivity;
 import com.jordigarcial.ucodeadidas2018.R;
 
 import java.io.File;
@@ -58,12 +60,12 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
     @Override
     public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product, viewGroup, false);
-        PersonViewHolder pvh = new PersonViewHolder(v);
+        PersonViewHolder pvh = new PersonViewHolder(context, v);
         return pvh;
     }
 
     @Override
-    public void onBindViewHolder(final PersonViewHolder personViewHolder, int i) {
+    public void onBindViewHolder(final PersonViewHolder personViewHolder, final int i) {
 
         personViewHolder.name.setText(products.get(i).getName());
         personViewHolder.price.setText(products.get(i).getPrice() + "€");
@@ -72,6 +74,13 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
         int drawableId = r.getIdentifier(products.get(i).getId(), "drawable", "com.jordigarcial.ucodeadidas2018");
         //System.out.println("product id: "+products.get(i).getId()+" ID nou: "+drawableId+" ID vell:"+R.drawable.ac7033);
         personViewHolder.image.setImageResource(drawableId);
+        personViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                ProductDetailActivity.start(context,products.get(i));
+            }
+        });
 
     }
 
@@ -87,13 +96,12 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
         TextView price;
         ImageView image;
 
-        PersonViewHolder(View itemView){
+        PersonViewHolder(final Context context, View itemView){
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.product_cv);
-            name = (TextView) itemView.findViewById(R.id.name);
-            price = (TextView) itemView.findViewById(R.id.price);
-            image = (ImageView) itemView.findViewById(R.id.imageView);
-
+            cv =  itemView.findViewById(R.id.product_cv);
+            name = itemView.findViewById(R.id.name);
+            price = itemView.findViewById(R.id.price);
+            image = itemView.findViewById(R.id.imageView);
         }
     }
 
