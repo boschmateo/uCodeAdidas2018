@@ -73,4 +73,40 @@ public class Product implements Serializable {
     public Map<Integer, Integer> getSize() {
         return size;
     }
+
+
+    public static class ProductBuilder {
+
+        private String id;
+        private String description;
+        private String name;
+        private float price;
+
+        public ProductBuilder() {
+        }
+
+        public ProductBuilder setId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProductBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ProductBuilder setDesc(String desc) {
+            this.description = desc;
+            return this;
+        }
+
+        public ProductBuilder setPrice(float price) {
+            this.price = price;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(id, name, description, price);
+        }
+    }
 }
