@@ -3,12 +3,14 @@ package com.jordigarcial.ucodeadidas2018;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private TextView tv_product_name;
     private TextView tv_product_desc;
     private TextView tv_product_price;
+    private ImageView tv_product_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_product_name = act.findViewById(R.id.tv_product_name);
         tv_product_desc = act.findViewById(R.id.tv_product_desc);
         tv_product_price = act.findViewById(R.id.tv_product_price);
+        tv_product_image = act.findViewById(R.id.tv_product_image);
     }
 
     public static void printToast(Context ctx, String msg) {
@@ -135,10 +139,14 @@ public class ProductDetailActivity extends AppCompatActivity {
      * @param product The product with which populate the layout.
      */
     private void populateViewsWithProduct(Product product) {
+        Resources r = getResources();
+        int drawableId = r.getIdentifier(product.getId(), "drawable", "com.jordigarcial.ucodeadidas2018");
+
+        tv_product_image.setImageResource(drawableId);
         tv_product_id.setText(product.getId());
         tv_product_name.setText(product.getName());
         tv_product_desc.setText(product.getDescription());
-        tv_product_price.setText(String.format("%f", product.getPrice()));
+        tv_product_price.setText(product.getPrice()+"");
     }
 
 }
