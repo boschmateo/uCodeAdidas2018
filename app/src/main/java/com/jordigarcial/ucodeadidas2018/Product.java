@@ -16,7 +16,7 @@ public class Product implements Serializable {
     private String description;
     private String name;
     private float price;
-    private Map<Integer, Integer> size;
+    private Map<String, String> size;
 
     public Product(String id, String description, String name, float price) {
         this.id = id;
@@ -33,9 +33,9 @@ public class Product implements Serializable {
         description = (String)dataSnapshot.child("description").getValue();
         name = (String)dataSnapshot.child("name").getValue();
         price = Float.parseFloat(""+dataSnapshot.child("price").getValue());
-        /*for (DataSnapshot item : dataSnapshot.child("size").getChildren()){
-            size.put(Integer.parseInt(item.getKey()), (Integer) item.getValue());
-        }*/
+        for (DataSnapshot item : dataSnapshot.child("size").getChildren()){
+            size.put(item.getKey(), (String) item.getValue());
+        }
     }
 
     public String getId() {
@@ -70,7 +70,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public Map<Integer, Integer> getSize() {
+    public Map<String, String> getSize() {
         return size;
     }
 
