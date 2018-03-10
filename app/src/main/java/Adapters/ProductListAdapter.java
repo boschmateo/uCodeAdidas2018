@@ -1,11 +1,10 @@
 package Adapters;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -52,17 +51,10 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        final String path = "res/drawable/" + products.get(i).getId() + ".jpg";
+        final String path = "res/drawable/" + products.get(i).getId() +".jpg";
         personViewHolder.name.setText(products.get(i).getName());
         personViewHolder.price.setText(products.get(i).getPrice()+"€");
-        String name = products.get(i).getId()+".jpg";
-        File image = new File(path);
-        Bitmap bitmap=null;
-        if(image.exists())
-            bitmap = BitmapFactory.decodeFile(path);
-
-        personViewHolder.image.setImageBitmap(bitmap);
-    }
+        islandref = storageRef.child();
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
