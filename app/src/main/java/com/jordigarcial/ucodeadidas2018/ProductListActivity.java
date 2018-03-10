@@ -2,6 +2,7 @@ package com.jordigarcial.ucodeadidas2018;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -18,7 +19,7 @@ import Adapters.ProductListAdapter;
 public class ProductListActivity extends AppCompatActivity {
 
     ListView listView;
-    ArrayList<Product> product = new ArrayList<Product>();
+    ArrayList<Product> productsList = new ArrayList<Product>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,12 @@ public class ProductListActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                product.add(new Product(dataSnapshot));
+                for (DataSnapshot item : dataSnapshot.getChildren()){
+                    Product product = new Product(item);
+                    System.out.println("Product added: "+product.getName());
+                    productsList.add(product);
+
+                }
             }
 
             @Override
@@ -38,9 +44,9 @@ public class ProductListActivity extends AppCompatActivity {
 
             }
         });
-        listView=(ListView) findViewById(R.id.listView);
-        ProductListAdapter adapter = new ProductListAdapter(this,product);
-        listView.setAdapter((ListAdapter) adapter);
+        listView=findViewById(R.id.listView);
+        ProductListAdapter adapter = ProductListAdapter.create(ProductListActivity.this, R.id.listView, productsList);
+        listView.setAdapter(adapter);
 
     }
 }
