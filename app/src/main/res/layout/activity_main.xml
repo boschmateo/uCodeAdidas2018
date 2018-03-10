@@ -21,18 +21,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product Detail"
-        android:onClick="onProductDetail"/>
+        android:onClick="ProductDetail"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product List"
-        android:onClick="onProductList"/>
+        android:onClick="ProductList"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wishlist"
-        android:onClick="onWishlist"/>
+        android:onClick="Wishlist"/>
 
 </LinearLayout>
