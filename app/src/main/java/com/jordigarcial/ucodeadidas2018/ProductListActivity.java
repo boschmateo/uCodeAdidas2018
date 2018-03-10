@@ -27,13 +27,20 @@ public class ProductListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
-        RecyclerView rv = (RecyclerView)findViewById(R.id.recyclerView);
+
+        RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
+
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("products");
+
+        final ProductListAdapter adapter = new ProductListAdapter(productsList, getApplicationContext());
+        rv.setAdapter(adapter);
+
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -42,16 +49,18 @@ public class ProductListActivity extends AppCompatActivity {
                     System.out.println("Product added: "+product.getName());
                     productsList.add(product);
                 }
+                adapter.notifyDataSetChanged();
+
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-        recyclerView=findViewById(R.id.recyclerView);
-        ProductListAdapter adapter = new ProductListAdapter(productsList, getApplicationContext());
-        recyclerView.setAdapter(adapter);
+
+
 
     }
 }
