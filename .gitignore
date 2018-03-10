@@ -97,6 +97,7 @@ fabric.properties
 modules.xml
 .idea/misc.xml 
 *.ipr
+.idea/vcs.xml
 
 
 ### Gradle ###
@@ -118,4 +119,6 @@ gradle-app.setting
 # Markdown Navigator Plugin
 .idea/markdown-navigator/
 .idea/markdown-navigator.xml
+
+
 
