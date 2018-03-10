@@ -41,8 +41,8 @@ import java.util.List;
 
 public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter.PersonViewHolder> {
 
-    List<Product> products;
-    Context context;
+    private List<Product> products;
+    private Context context;
 
     public ProductListAdapter(List<Product> products, Context context){
 
