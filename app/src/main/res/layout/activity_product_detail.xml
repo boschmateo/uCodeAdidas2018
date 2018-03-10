@@ -6,8 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jordigarcial.ucodeadidas2018.ProductDetailActivity"
-    tools:a>
+    tools:context="com.jordigarcial.ucodeadidas2018.ProductDetailActivity">
 
     <TextView
         android:layout_width="match_parent"

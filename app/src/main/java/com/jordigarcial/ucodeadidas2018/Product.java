@@ -18,10 +18,6 @@ public class Product implements Serializable {
     private float price;
     private Map<Integer, Integer> size;
 
-    public Product() {
-
-    }
-
     public Product(String id, String description, String name, float price) {
         this.id = id;
         this.description = description;

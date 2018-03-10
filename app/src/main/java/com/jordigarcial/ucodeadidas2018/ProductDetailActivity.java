@@ -15,7 +15,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     public static void start(Context context, Product product) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
-        intent.putExtra(product); //
+        intent.putExtra("product", product);
         context.startActivity(intent);
     }
 
