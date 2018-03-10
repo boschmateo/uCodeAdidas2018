@@ -33,9 +33,9 @@ public class Product implements Serializable {
         description = (String)dataSnapshot.child("description").getValue();
         name = (String)dataSnapshot.child("name").getValue();
         price = Float.parseFloat(""+dataSnapshot.child("price").getValue());
-        for (DataSnapshot item : dataSnapshot.child("size").getChildren()){
+        /*for (DataSnapshot item : dataSnapshot.child("size").getChildren()){
             size.put(Integer.parseInt(item.getKey()), (Integer) item.getValue());
-        }
+        }*/
     }
 
     public String getId() {

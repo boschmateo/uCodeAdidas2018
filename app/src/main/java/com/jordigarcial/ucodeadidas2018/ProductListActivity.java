@@ -50,7 +50,7 @@ public class ProductListActivity extends AppCompatActivity {
             }
         });
         recyclerView=findViewById(R.id.recyclerView);
-        ProductListAdapter adapter = new ProductListAdapter(productsList);
+        ProductListAdapter adapter = new ProductListAdapter(productsList, getApplicationContext());
         recyclerView.setAdapter(adapter);
 
     }

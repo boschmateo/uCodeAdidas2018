@@ -14,8 +14,7 @@
 
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="219dp"
-                app:srcCompat="@drawable/example_shoe" />
+                android:layout_height="219dp" />
 
             <TextView
                 android:textStyle="bold"
