@@ -6,6 +6,9 @@ import java.util.Map;
 
 import com.google.firebase.database.DataSnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Created by roger on 10/03/2018.
  */
@@ -17,8 +20,10 @@ public class Product implements Serializable {
     private String name;
     private float price;
     private Map<String, String> size;
+    private String location;
 
-    public Product(String id, String description, String name, float price) {
+    public Product(String id, String description, String name, float price, String location) {
+        this.location = location;
         this.id = id;
         this.description = description;
         this.name = name;
@@ -26,16 +31,39 @@ public class Product implements Serializable {
 
     }
 
-    public Product(DataSnapshot dataSnapshot){
+    public Product(DataSnapshot dataSnapshot) {
         System.out.print(dataSnapshot.getKey());
         size = new HashMap<>();
         id = dataSnapshot.getKey();
-        description = (String)dataSnapshot.child("description").getValue();
-        name = (String)dataSnapshot.child("name").getValue();
-        price = Float.parseFloat(""+dataSnapshot.child("price").getValue());
-        for (DataSnapshot item : dataSnapshot.child("size").getChildren()){
+        location = (String) dataSnapshot.child("location").getValue();
+        description = (String) dataSnapshot.child("description").getValue();
+        name = (String) dataSnapshot.child("name").getValue();
+        price = Float.parseFloat("" + dataSnapshot.child("price").getValue());
+        for (DataSnapshot item : dataSnapshot.child("size").getChildren()) {
             size.put(item.getKey(), (String) item.getValue());
         }
+    }
+
+    public Map toJson() {
+        Map mapPoints = new HashMap();
+        mapPoints.put("description", description);
+        mapPoints.put("name", name);
+        mapPoints.put("price", price + "");
+        mapPoints.put("size", size);
+
+        return mapPoints;
+    }
+
+    public void setSize(Map<String, String> size) {
+        this.size = size;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getId() {
@@ -75,38 +103,4 @@ public class Product implements Serializable {
     }
 
 
-    public static class ProductBuilder {
-
-        private String id;
-        private String description;
-        private String name;
-        private float price;
-
-        public ProductBuilder() {
-        }
-
-        public ProductBuilder setId(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public ProductBuilder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public ProductBuilder setDesc(String desc) {
-            this.description = desc;
-            return this;
-        }
-
-        public ProductBuilder setPrice(float price) {
-            this.price = price;
-            return this;
-        }
-
-        public Product build() {
-            return new Product(id, name, description, price);
-        }
-    }
 }

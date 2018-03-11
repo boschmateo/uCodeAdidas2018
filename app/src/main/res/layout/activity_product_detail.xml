@@ -38,13 +38,6 @@
         android:layout_gravity="center"
         android:id="@+id/tv_product_id"/>
 
-    <TextView
-        android:layout_margin="10sp"
-        android:id="@+id/tallas_titulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tallas disponibles" />
-
 
     <TextView
         android:id="@+id/tv_product_size"

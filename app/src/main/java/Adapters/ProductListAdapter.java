@@ -18,17 +18,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.jordigarcial.ucodeadidas2018.Product;
 import com.jordigarcial.ucodeadidas2018.ProductDetailActivity;
 import com.jordigarcial.ucodeadidas2018.R;
+import com.jordigarcial.ucodeadidas2018.ViewDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +45,7 @@ import java.util.List;
  * Created by sergi on 10/03/2018.
  */
 
-public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter.PersonViewHolder> {
+public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter.PersonViewHolder>{
 
     private List<Product> products;
     private Context context;
@@ -82,6 +86,18 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
             }
         });
 
+        personViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                System.out.println("LONG CLICK!");
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference("favourites");
+                ref.child(products.get(i).getId()).setValue(products.get(i).toJson());
+                printToast(context, "New item add to favourites!");
+                return true;
+            }
+        });
+
     }
 
 
@@ -89,6 +105,8 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
+
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
@@ -103,6 +121,12 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
             price = itemView.findViewById(R.id.price);
             image = itemView.findViewById(R.id.imageView);
         }
+    }
+
+    public static void printToast(Context ctx, String msg) {
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(ctx, msg, duration);
+        toast.show();
     }
 
 }

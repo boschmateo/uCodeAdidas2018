@@ -103,6 +103,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Product p = new Product(dataSnapshot);
                 populateViewsWithProduct(p);
+                ViewDialog alert = new ViewDialog(p);
+                alert.showDialog(ProductDetailActivity.this, "Error de conexión al servidor");
             }
 
             @Override
@@ -187,16 +189,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         int drawableId = r.getIdentifier(product.getId(), "drawable", "com.jordigarcial.ucodeadidas2018");
 
         tv_product_image.setImageResource(drawableId);
-        tv_product_id.setText(product.getId());
+        tv_product_id.setText(product.getId().toUpperCase());
         tv_product_name.setText(product.getName());
         tv_product_desc.setText(product.getDescription());
         tv_product_price.setText(product.getPrice()+"€");
-        /*String sizes="";
-        for (Map.Entry<String,String> value : product.getSize().entrySet()){
-            sizes = sizes + " " +value.getKey()+ ": " +value.ge
-        }
-        tv_product_size.setText(product.getSize().);
-        */
+
+
     }
 
 }

@@ -30,9 +30,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".WishlistActivity" />
-
         <activity android:name=".ProductListActivity"/>
+        <activity android:name=".FavouriteProductListActivity"/>
     </application>
 
 </manifest>

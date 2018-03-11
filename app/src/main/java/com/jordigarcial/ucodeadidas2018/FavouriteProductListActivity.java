@@ -1,15 +1,9 @@
 package com.jordigarcial.ucodeadidas2018;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,11 +15,10 @@ import java.util.ArrayList;
 
 import Adapters.ProductListAdapter;
 
+public class FavouriteProductListActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-
-    ArrayList<Product> productsList = new ArrayList<Product>();
+    RecyclerView recyclerView;
+    ArrayList<Product> favouriteList = new ArrayList<Product>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +28,14 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
 
-
-
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("products");
+        DatabaseReference ref = database.getReference("favourites");
 
-        final ProductListAdapter adapter = new ProductListAdapter(productsList, getApplicationContext());
-        rv.setAdapter(adapter);
+        final ProductListAdapter favAdapter = new ProductListAdapter(favouriteList, getApplicationContext());
+        rv.setAdapter(favAdapter);
 
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -53,12 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot item : dataSnapshot.getChildren()){
                     Product product = new Product(item);
                     System.out.println("Product added: "+product.getName());
-                    productsList.add(product);
+                    favouriteList.add(product);
                 }
-                adapter.notifyDataSetChanged();
+                favAdapter.notifyDataSetChanged();
 
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -67,25 +57,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        if(item.getItemId() == R.id.favourites) {
-            start(this, FavouriteProductListActivity.class);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public static void start(Context context, Class<?> activity) {
-        Intent intent = new Intent(context, activity);
-        context.startActivity(intent);
-    }
-
 }
