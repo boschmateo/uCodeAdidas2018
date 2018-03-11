@@ -41,6 +41,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     private IntentFilter[] intentFiltersArray;
     private String[][] techListsArray;
 
+    Product product;
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -86,14 +88,42 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onResume();
         NfcAdapter.getDefaultAdapter(this).enableForegroundDispatch(this, pendingIntent, intentFiltersArray, null);
 
-        if (activityWasLaunchedByNFC()){
-            String productId = getTagString();
-            getProductWithId(productId, ref);
+        if (activityWasLaunchedByNFC()) {
+            String tagString = getTagString();
+
+            if (isProductTag(tagString)) {
+                String productId = getProductId(tagString);
+                String storeId = getStoreId(tagString);
+                getProductWithId(productId, ref);
+            }
+            else if (isStoreTag(tagString)) {
+                String storeId = getStoreId(tagString);
+
+                ViewDialog alert = new ViewDialog(product);
+                alert.showDialog(ProductDetailActivity.this, "Error de conexión al servidor");
+            }
+
         }
         else {
-            Product product = getProductFromIntent();
+            product = getProductFromIntent();
             populateViewsWithProduct(product);
         }
+    }
+
+    private boolean isProductTag(String tagString) {
+        return (tagString.charAt(0) == 'P');
+    }
+
+    private boolean isStoreTag(String tagString) {
+        return (tagString.charAt(0) == 'T');
+    }
+
+    private String getStoreId(String tagString) {
+        return tagString.substring(1, 5);
+    }
+
+    private String getProductId(String tagString) {
+        return tagString.substring(5, 11);
     }
 
     private void getProductWithId(String productId, DatabaseReference ref) {
@@ -101,10 +131,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         ref.child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Product p = new Product(dataSnapshot);
-                populateViewsWithProduct(p);
-                ViewDialog alert = new ViewDialog(p);
-                alert.showDialog(ProductDetailActivity.this, "Error de conexión al servidor");
+                product = new Product(dataSnapshot);
+                populateViewsWithProduct(product);
             }
 
             @Override
