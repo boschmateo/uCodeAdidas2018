@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -92,7 +93,7 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref = database.getReference("favourites");
                 ref.child(products.get(i).getId()).setValue(products.get(i).toJson());
-
+                printToast(context, "New item add to favourites!");
                 return true;
             }
         });
@@ -120,6 +121,12 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
             price = itemView.findViewById(R.id.price);
             image = itemView.findViewById(R.id.imageView);
         }
+    }
+
+    public static void printToast(Context ctx, String msg) {
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(ctx, msg, duration);
+        toast.show();
     }
 
 }

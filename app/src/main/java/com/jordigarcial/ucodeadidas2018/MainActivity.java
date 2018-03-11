@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         if(item.getItemId() == R.id.favourites) {
-            start(this, WishlistActivity.class);
+            start(this, FavouriteProductListActivity.class);
         }
         return super.onOptionsItemSelected(item);
     }
