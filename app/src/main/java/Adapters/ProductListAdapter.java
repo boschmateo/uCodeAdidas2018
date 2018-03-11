@@ -98,10 +98,10 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
 
         PersonViewHolder(final Context context, View itemView){
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.product_cv);
-            name = (TextView) itemView.findViewById(R.id.name);
-            price = (TextView) itemView.findViewById(R.id.price);
-            image = (ImageView) itemView.findViewById(R.id.imageView);
+            cv =  itemView.findViewById(R.id.product_cv);
+            name = itemView.findViewById(R.id.name);
+            price = itemView.findViewById(R.id.price);
+            image = itemView.findViewById(R.id.imageView);
         }
     }
 
