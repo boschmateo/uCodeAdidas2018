@@ -26,6 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
+/**
+ * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ */
 public class ProductDetailActivity extends AppCompatActivity {
 
     private TextView tv_product_id;
