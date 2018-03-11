@@ -47,7 +47,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        printToast(this, "New intent");
     }
 
     @Override
@@ -100,7 +99,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 String storeId = getStoreId(tagString);
 
                 ViewDialog alert = new ViewDialog(product);
-                alert.showDialog(ProductDetailActivity.this, "Error de conexión al servidor");
+                alert.showDialog(ProductDetailActivity.this, "Info tienda");
             }
 
         }
@@ -133,6 +132,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 product = new Product(dataSnapshot);
                 populateViewsWithProduct(product);
+                ViewDialog alert = new ViewDialog(product);
+                alert.showDialog(ProductDetailActivity.this, "Info tienda");
             }
 
             @Override

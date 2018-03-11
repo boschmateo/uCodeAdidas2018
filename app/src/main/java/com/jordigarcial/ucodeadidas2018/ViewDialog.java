@@ -18,7 +18,7 @@ public class ViewDialog {
     public void showDialog(Activity activity, String msg){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         dialog.setContentView(R.layout.product_found_dialog);
 
         TextView sizes = (TextView) dialog.findViewById(R.id.all_sizes);
