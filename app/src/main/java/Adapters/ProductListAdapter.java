@@ -23,6 +23,8 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -41,7 +43,7 @@ import java.util.List;
  * Created by sergi on 10/03/2018.
  */
 
-public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter.PersonViewHolder> {
+public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter.PersonViewHolder>{
 
     private List<Product> products;
     private Context context;
@@ -82,6 +84,18 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
             }
         });
 
+        personViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                System.out.println("LONG CLICK!");
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference("favourites");
+                ref.child(products.get(i).getId()).setValue(products.get(i).toJson());
+                //ref.child(products.get(i).getId()).push(products.get(i));
+                return true;
+            }
+        });
+
     }
 
 
@@ -89,6 +103,8 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
+
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
