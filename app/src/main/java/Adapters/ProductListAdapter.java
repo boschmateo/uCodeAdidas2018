@@ -31,6 +31,7 @@ import com.google.firebase.storage.StorageReference;
 import com.jordigarcial.ucodeadidas2018.Product;
 import com.jordigarcial.ucodeadidas2018.ProductDetailActivity;
 import com.jordigarcial.ucodeadidas2018.R;
+import com.jordigarcial.ucodeadidas2018.ViewDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,7 +92,7 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref = database.getReference("favourites");
                 ref.child(products.get(i).getId()).setValue(products.get(i).toJson());
-                //ref.child(products.get(i).getId()).push(products.get(i));
+
                 return true;
             }
         });

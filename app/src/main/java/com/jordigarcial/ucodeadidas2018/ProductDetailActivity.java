@@ -54,6 +54,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
     private void getProductWithId(String productId, DatabaseReference ref){
@@ -64,6 +66,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                 Product p = new Product(dataSnapshot);
                 System.out.println(p.getName());
                 populateViewsWithProduct(p);
+                ViewDialog alert = new ViewDialog(p);
+                alert.showDialog(ProductDetailActivity.this, "Error de conexión al servidor");
             }
 
             @Override
@@ -152,6 +156,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_product_name.setText(product.getName());
         tv_product_desc.setText(product.getDescription());
         tv_product_price.setText(product.getPrice()+"€");
+
+
     }
 
 }
