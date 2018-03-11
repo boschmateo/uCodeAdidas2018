@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import java.util.Map;
 
+/**
+ * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ */
 public class ViewDialog {
 
     Product product;

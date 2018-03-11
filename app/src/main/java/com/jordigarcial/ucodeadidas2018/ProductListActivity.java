@@ -18,6 +18,9 @@ import java.util.ArrayList;
 
 import Adapters.ProductListAdapter;
 
+/**
+ * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ */
 public class ProductListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;

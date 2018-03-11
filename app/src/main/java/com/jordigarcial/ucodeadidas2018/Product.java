@@ -10,9 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Created by roger on 10/03/2018.
+ * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
  */
-
 public class Product implements Serializable {
 
     private String id;
