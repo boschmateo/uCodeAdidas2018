@@ -1,9 +1,6 @@
 # uCode Adidas App #
 _Edición Zaragoza 2018_
 
-# Aplicación
-Tienda fis
-
 # Miembros
 - Roger Bosch
 - Jordi García
