@@ -32,37 +32,45 @@ public class ProductDetailActivity extends AppCompatActivity {
     private ImageView tv_product_image;
     private TextView tv_product_size;
 
+    private DatabaseReference ref;
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        printToast(this, "New intent");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
-
         findLayoutViews(this);
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("products");
-
-        Product product;
-        if (activityWasLaunchedByNFC()){
-            String productId = getTagString();
-            System.out.println(productId);
-            getProductWithId(productId, ref); // TODO: RU
-        }
-        else {
-            product = getProductFromIntent();
-            populateViewsWithProduct(product);
-        }
-
-
-
+        ref = database.getReference("products");
     }
 
-    private void getProductWithId(String productId, DatabaseReference ref){
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (activityWasLaunchedByNFC()){
+            String productId = getTagString();
+            getProductWithId(productId, ref);
+        }
+        else {
+            Product product = getProductFromIntent();
+            populateViewsWithProduct(product);
+        }
+    }
+
+    private void getProductWithId(String productId, DatabaseReference ref) {
 
         ref.child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Product p = new Product(dataSnapshot);
-                System.out.println(p.getName());
                 populateViewsWithProduct(p);
             }
 
