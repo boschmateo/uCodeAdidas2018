@@ -1,5 +1,6 @@
 package com.jordigarcial.ucodeadidas2018;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
 
-        
+
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
@@ -71,6 +72,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if(item.getItemId() == R.id.favourites) {
+            start(this, WishlistActivity.class);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public static void start(Context context, Class<?> activity) {
+        Intent intent = new Intent(context, activity);
+        context.startActivity(intent);
     }
 
 }
