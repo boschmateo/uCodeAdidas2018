@@ -1,12 +1,15 @@
 package com.jordigarcial.ucodeadidas2018;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.tech.Ndef;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,39 +35,73 @@ public class ProductDetailActivity extends AppCompatActivity {
     private ImageView tv_product_image;
     private TextView tv_product_size;
 
+    private DatabaseReference ref;
+
+    private PendingIntent pendingIntent;
+    private IntentFilter[] intentFiltersArray;
+    private String[][] techListsArray;
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        printToast(this, "New intent");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
-
         findLayoutViews(this);
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("products");
+        ref = database.getReference("products");
 
-        Product product;
-        if (activityWasLaunchedByNFC()){
-            String productId = getTagString();
-            System.out.println(productId);
-            getProductWithId(productId, ref); // TODO: RU
+        /////////////////////////////
+        // ???
+        pendingIntent = PendingIntent.getActivity(
+                this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+
+        IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        try {
+            ndef.addDataType("text/plain");    /* Handles plain text dispatches. */
         }
-        else {
-            product = getProductFromIntent();
-            populateViewsWithProduct(product);
+        catch (IntentFilter.MalformedMimeTypeException e) {
+            throw new RuntimeException("fail", e);
         }
 
-
-
-
-
+        intentFiltersArray = new IntentFilter[] {ndef, };
+        techListsArray = new String[][] { new String[] { Ndef.class.getName() } };
+        /////////////////////////////
     }
 
-    private void getProductWithId(String productId, DatabaseReference ref){
+    @Override
+    protected void onPause() {
+        super.onPause();
+        NfcAdapter.getDefaultAdapter(this).disableForegroundDispatch(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NfcAdapter.getDefaultAdapter(this).enableForegroundDispatch(this, pendingIntent, intentFiltersArray, null);
+
+        if (activityWasLaunchedByNFC()){
+            String productId = getTagString();
+            getProductWithId(productId, ref);
+        }
+        else {
+            Product product = getProductFromIntent();
+            populateViewsWithProduct(product);
+        }
+    }
+
+    private void getProductWithId(String productId, DatabaseReference ref) {
 
         ref.child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Product p = new Product(dataSnapshot);
-                System.out.println(p.getName());
                 populateViewsWithProduct(p);
                 ViewDialog alert = new ViewDialog(p);
                 alert.showDialog(ProductDetailActivity.this, "Error de conexión al servidor");

@@ -92,8 +92,8 @@ public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter
                 System.out.println("LONG CLICK!");
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref = database.getReference("favourites");
-                ref.child(products.get(i).getId()).setValue(products.get(i).toJson());
-                printToast(context, "New item add to favourites!");
+                //ef.child(products.get(i).getId()).setValue(products.get(i).toJson());
+                //printToast(context, "New item add to favourites!");
                 return true;
             }
         });
