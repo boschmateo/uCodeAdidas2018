@@ -1,28 +1,31 @@
-package com.jordigarcial.ucodeadidas2018;
+package com.jordigarcial.ucodeadidas2018.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jordigarcial.ucodeadidas2018.model.Product;
+import com.jordigarcial.ucodeadidas2018.R;
 
 import java.util.ArrayList;
 
-import Adapters.ProductListAdapter;
+import com.jordigarcial.ucodeadidas2018.adapters.ProductListAdapter;
 
 /**
- * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ * Main activity.
+ * Retrieves and displays a list of products from a Firebase database.
+ *
+ * @author Roger Bosch, Jordi García L, Jeroni Molina, Sergi Quevedo
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -37,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
 
-
-
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         final ProductListAdapter adapter = new ProductListAdapter(productsList, getApplicationContext());
         rv.setAdapter(adapter);
-
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
