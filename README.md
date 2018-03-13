@@ -1,24 +1,50 @@
 # uCode Adidas App #
-_Edición Zaragoza 2018_
+_Zaragoza 2018 Edition_
 
-# Descripción #
-Una aplicación que permite consultar una lista de productos, ver información detallada, escanear
-tarjetas NFC y abrir.
+This Android app was developed by four CS Students during the course of a weekend at Hackathon uCode 
+Adidas 2018 (Zaragoza). It serves as a proof of concept for the team's idea of implementing NFC tags
+in Adidas store to provide consumers with a quick way to consult product information in their
+smartphones.
 
-# Tarjetas NFC #
-- Formato Producto: Pxxxxyyyyyy
-- Formato Tienda: Txxxx
+This application can be installed in devices running Android 7.0 (Nougat) with an NFC reader.
 
-Donde xxxx es el id de la tienda y yyyyyy es el id del producto.
+## Description ##
+The applicacion features three modes of operation:
 
-# Miembros
+1. Shows the user a list of Adidas products retrieved from a (supposed) Adidas database and displays
+global information (name, description, price) about it. In this implementation a personal Firebase 
+database is used.
+
+2. Allows a user in the entrance of an Adidas store to locate an item from the product list in the 
+current store. This is done by navigating to the product info page in the app and bringing the phone
+closer to a supposed NFC stand in the store. The app will then show local information about the
+product (location within the store, size availability).
+
+3. Allows a user in front of a physical product in a store to consult both global and local information
+about it, as if he had found it and selected it in the product list. This is done by bringing the
+phone closer to a product NFC tag.
+
+## Screenshots ##
+Product List             |  Product Detail          |Product Popup
+:-------------------------:|:-------------------------:|:-------------------------:
+![](docs/MainActivity.jpeg)  |  ![](docs/ProductDetailActivity.jpeg) |  ![](docs/ProductPopup.jpeg)
+
+## NFC Tag Format ##
+The NFC tag should contain a single string written to it in NFC Data Exchange Format (NDEF).
+
+- Product format: Pxxxxyyyyyy
+- Store format: Txxxx
+
+Where xxxx is the store id and yyyyyy is the product id.
+
+## Development Team ##
 - Roger Bosch
-- Jordi García
+- Jordi García L
 - Jeroni Molina
 - Sergi Quevedo
 
-LICENCIA
----------
+License
+--------
     MIT License
 
     Copyright (c) 2018 Jordi García Lissón
@@ -41,6 +67,6 @@ LICENCIA
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 
-Written by Jordi García L <jgarcialisson@gmail.com\>, June 2017
+Written by Jordi García L, March 2018
 
 

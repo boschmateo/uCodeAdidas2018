@@ -1,30 +1,32 @@
-package com.jordigarcial.ucodeadidas2018;
+package com.jordigarcial.ucodeadidas2018.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jordigarcial.ucodeadidas2018.R;
+import com.jordigarcial.ucodeadidas2018.model.Product;
 
 import java.util.ArrayList;
 
-import Adapters.ProductListAdapter;
+import com.jordigarcial.ucodeadidas2018.adapters.ProductListAdapter;
 
 /**
- * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ * Wishlist Activity
+ * It shows the subset of products that the user has set as favorite.
+ *
+ * @author Roger Bosch, Jordi García L, Jeroni Molina, Sergi Quevedo
  */
-public class ProductListActivity extends AppCompatActivity {
+public class FavouriteProductListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<Product> productsList = new ArrayList<Product>();
+    ArrayList<Product> favouriteList = new ArrayList<Product>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,10 @@ public class ProductListActivity extends AppCompatActivity {
         rv.setLayoutManager(llm);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("products");
+        DatabaseReference ref = database.getReference("favourites");
 
-        final ProductListAdapter adapter = new ProductListAdapter(productsList, getApplicationContext());
-        rv.setAdapter(adapter);
+        final ProductListAdapter favAdapter = new ProductListAdapter(favouriteList, getApplicationContext());
+        rv.setAdapter(favAdapter);
 
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -50,20 +52,17 @@ public class ProductListActivity extends AppCompatActivity {
                 for (DataSnapshot item : dataSnapshot.getChildren()){
                     Product product = new Product(item);
                     System.out.println("Product added: "+product.getName());
-                    productsList.add(product);
+                    favouriteList.add(product);
                 }
-                adapter.notifyDataSetChanged();
+                favAdapter.notifyDataSetChanged();
 
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
 
     }
 }

@@ -1,4 +1,4 @@
-package com.jordigarcial.ucodeadidas2018;
+package com.jordigarcial.ucodeadidas2018.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -10,7 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ * Model class of a Product
+ *
+ * @author Roger Bosch
  */
 public class Product implements Serializable {
 

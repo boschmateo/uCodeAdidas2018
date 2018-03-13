@@ -1,50 +1,28 @@
-package Adapters;
+package com.jordigarcial.ucodeadidas2018.adapters;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.jordigarcial.ucodeadidas2018.Product;
-import com.jordigarcial.ucodeadidas2018.ProductDetailActivity;
+import com.jordigarcial.ucodeadidas2018.model.Product;
+import com.jordigarcial.ucodeadidas2018.activities.ProductDetailActivity;
 import com.jordigarcial.ucodeadidas2018.R;
-import com.jordigarcial.ucodeadidas2018.ViewDialog;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sergi on 10/03/2018.
+ * Adapter Class for Product List.
+ *
+ * @author Roger Bosch, Jordi García L, Jeroni Molina, Sergi Quevedo
  */
-
 public class ProductListAdapter extends  RecyclerView.Adapter<ProductListAdapter.PersonViewHolder>{
 
     private List<Product> products;

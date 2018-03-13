@@ -1,4 +1,4 @@
-package com.jordigarcial.ucodeadidas2018;
+package com.jordigarcial.ucodeadidas2018.activities;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -16,18 +16,21 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Map.Entry;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Map;
+import com.jordigarcial.ucodeadidas2018.R;
+import com.jordigarcial.ucodeadidas2018.ui.ViewDialog;
+import com.jordigarcial.ucodeadidas2018.model.Product;
 
 /**
- * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ * Product Info Activity.
+ * Displays all the information about a single product.
+ *
+ * @author Roger Bosch, Jordi García L, Jeroni Molina, Sergi Quevedo
  */
 public class ProductDetailActivity extends AppCompatActivity {
 

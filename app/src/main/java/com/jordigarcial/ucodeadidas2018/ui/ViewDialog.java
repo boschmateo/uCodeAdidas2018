@@ -1,14 +1,20 @@
-package com.jordigarcial.ucodeadidas2018;
+package com.jordigarcial.ucodeadidas2018.ui;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.jordigarcial.ucodeadidas2018.R;
+import com.jordigarcial.ucodeadidas2018.model.Product;
+
 import java.util.Map;
 
 /**
- * @author Jordi García Lissón, Roger Bosch, Jeroni Molina, Sergi Quevedo
+ * View Dialog Class.
+ * Implements a ViewDialog that is shown to display local information about a product.
+ *
+ * @author Roger Bosch, Jordi García L, Jeroni Molina, Sergi Quevedo
  */
 public class ViewDialog {
 
